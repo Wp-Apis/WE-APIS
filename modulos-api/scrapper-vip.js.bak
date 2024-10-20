@@ -62,7 +62,7 @@ const playStoreSearch = (query) => new Promise((resolve, reject) => {
 })
 
 // OpenAi - ChatGPT - Feita por Vitinho ️🤸🏻‍♂️
-OPENAI_KEY = "" // Para utilizar os recursos da OpenAi é necessário essa definição para puxar a resposta, então não apague.
+OPENAI_KEY = "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" // Para utilizar os recursos da OpenAi é necessário essa definição para puxar a resposta, então não apague.
 
 const InArtificial = async (query) => {
 let response = await fetch('https://api.openai.com/v1/completions', {
