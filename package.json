@@ -1,7 +1,7 @@
 {
-  "name": "vncs-code",
+  "name": "lady-apis",
   "version": "1.0.0",
-  "description": "API para interações com XANAX usando scrapers e Puppeteer.",
+  "description": "API da Lady-bug bot",
   "engines": {
     "node": "17.15.1"
   },
@@ -25,6 +25,6 @@
     "api",
     "scraper"
   ],
-  "author": "SEU_NOME",
-  "license": "MIT"  // ou outra licença, se aplicável
+  "author": "lady_dev",
+  "license": "MIT"
 }
