@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "API da Lady-bug bot",
   "engines": {
-    "node": "17.15.1"
+  "node": ">=18.0.0"
   },
   "main": "jrpc.js",
   "scripts": {
