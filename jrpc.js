@@ -1,12 +1,12 @@
 bla = process.cwd() // NÃ£o mecha aqui..
 
 //pra logar em host👇
-//const PORT = process.env.PORT || 4059
+const PORT = process.env.PORT || 4059
 
 //escolha um e so retirar o //
 
 //pra ligar no termux👇
-const port = 3000;
+//const port = 3000;
 
 var fs = require('fs')
 var axios = require('axios')
@@ -7124,14 +7124,14 @@ aviso: '❌️ PÁGINA NÃO ENCONTRADA! ❌️'
 
 //////MOSTRA SE O APP FOI ABERTO
 //pra logar em host👇
-//app.listen(PORT, () => {})
+app.listen(PORT, () => {})
 
 //escolha um e so retirar o //
 
 //pra ligar no termux👇
-app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
-});
+//app.listen(port, () => {
+   // console.log(`Servidor rodando em http://localhost:${port}`);
+//});
 
 console.log(banner.string)
 
