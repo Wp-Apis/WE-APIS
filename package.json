@@ -1,7 +1,7 @@
 {
-  "name": "VNCSCODE",
+  "name": "vncs-code",
   "version": "1.0.0",
-  "description": "XANAX APIS",
+  "description": "API para interações com XANAX usando scrapers e Puppeteer.",
   "engines": {
     "node": "17.15.1"
   },
@@ -19,12 +19,12 @@
     "request": "^2.81.0",
     "tape": "^4.7.0"
   },
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
   "keywords": [
     "node",
-    "express"
-  ]
+    "express",
+    "api",
+    "scraper"
+  ],
+  "author": "SEU_NOME",
+  "license": "MIT"  // ou outra licença, se aplicável
 }
