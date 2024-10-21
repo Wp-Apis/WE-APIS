@@ -2,6 +2,6 @@
 
 # Instala o Axios
 echo "Instalando o Axios..."
-npm install axios
+yarn install axios
 
 echo "Axios instalado com sucesso!"
