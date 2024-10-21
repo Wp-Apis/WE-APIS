@@ -11,9 +11,10 @@
     "start": "sh start.sh"
   },
   "dependencies": {
-    "@bochilteam/scraper-sosmed": "^1.0.5",
-    "puppeteer": "^21.1.0",
-    "zod": "^3.22.2"
+  "@bochilteam/scraper-sosmed": "^1.0.5",
+  "puppeteer": "^21.1.0",
+  "zod": "^3.22.2",
+  "ws": "^8.13.0"
   },
   "devDependencies": {
     "request": "^2.81.0",
