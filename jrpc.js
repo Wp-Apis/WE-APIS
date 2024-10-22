@@ -6,8 +6,7 @@ const PORT = process.env.PORT || 4059
 //escolha um e so retirar o //
 
 //pra ligar no termux👇
-//const port = 3000;
-const session = require('express-session');
+//const port = 3000; 
 var fs = require('fs')
 var axios = require('axios')
 var mumaker = require('mumaker')
@@ -148,29 +147,17 @@ fs.writeFileSync("./lib/secret/usuarios.json", JSON.stringify(users, null, 2));
 }}} 
 
 
+const express = require('express');
+const path = require('path');
+const app = express();
+const PORT = 3000;
+
 // Middleware para analisar dados do corpo da requisição
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Configuração da sessão
-app.use(session({
-    secret: 'sua-chave-secreta', // Troque por uma chave secreta forte
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false } // Defina como true se usar HTTPS
-}));
-
-// Middleware de autenticação
-function isAuthenticated(req, res, next) {
-    if (req.session && req.session.user) {
-        return next(); // Usuário autenticado, prossiga
-    } else {
-        return res.redirect('/'); // Redireciona para a página de login
-    }
-}
-
 // Rota para o painel de login
-app.get('/', (req, res) => {
+app.get('/painel', (req, res) => {
     res.sendFile(path.join(__dirname, './public/', 'adm.html'));
 });
 
@@ -181,36 +168,16 @@ app.post('/login', (req, res) => {
 
     // Verifica as credenciais
     if (username === 'Lady-Apis' && password === '1404') {
-        req.session.user = username; // Armazena o usuário na sessão
-        res.redirect('/admin'); // Redireciona para a página administrativa
+        // Redireciona para a página administrativa
+        res.sendFile(path.join(__dirname, './public/', 'admin.html'));
     } else {
         res.status(401).send('Nome de usuário ou senha incorretos.'); // Resposta de erro
     }
 });
 
-// Rota protegida para o painel administrativo
-app.get('/admin', isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, './public/', 'admin.html'));
-});
 
-// Rota para adicionar chave (exemplo)
-app.post('/api/add-key', isAuthenticated, (req, res) => {
-    const key = req.body.key;
-    // Lógica para adicionar a chave
-    res.send(`Chave "${key}" adicionada com sucesso!`);
-});
 
-// Rota para deletar chave (exemplo)
-app.post('/api/del-key', isAuthenticated, (req, res) => {
-    const key = req.body.key;
-    // Lógica para deletar a chave
-    res.send(`Chave "${key}" deletada com sucesso!`);
-});
 
-// Inicializa o servidor
-app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
 
 
 app.get('/security',(req, res) => {
