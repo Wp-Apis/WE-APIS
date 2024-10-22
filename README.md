@@ -1,2 +1,2 @@
 # lady rest api
-https://i.imgur.com/o9KfySB.jpeg
+![Lady REST API](https://i.imgur.com/o9KfySB.jpeg)
