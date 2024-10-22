@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<!---[ ENTÃO TA PEGANDO CÓDIGO FONTE NE SAFADO KKKKKK SEGUE LA NO YOUTUBE SANDRO BOT ]---->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,23 +67,42 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            if (username === 'Lady-Apis' && password === '1404') {
-                Swal.fire({
-                    title: 'Sucesso!',
-                    text: 'Login realizado com sucesso!',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                }).then(() => {
-                    window.location.href = 'admin.html'; // Redireciona para admin.html
-                });
-            } else {
+            // Enviar as credenciais para o servidor de forma segura
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        title: 'Sucesso!',
+                        text: 'Login realizado com sucesso!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        window.location.href = '/panel'; // Redireciona para /panel após autenticação
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Erro!',
+                        text: 'Nome de usuário ou senha incorretos.',
+                        icon: 'error',
+                        confirmButtonText: 'Tentar Novamente'
+                    });
+                }
+            })
+            .catch(error => {
                 Swal.fire({
                     title: 'Erro!',
-                    text: 'Nome de usuário ou senha incorretos.',
+                    text: 'Erro na autenticação. Tente novamente.',
                     icon: 'error',
-                    confirmButtonText: 'Tentar Novamente'
+                    confirmButtonText: 'OK'
                 });
-            }
+            });
         });
     </script>
 </body>
