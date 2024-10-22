@@ -147,11 +147,6 @@ fs.writeFileSync("./lib/secret/usuarios.json", JSON.stringify(users, null, 2));
 }}} 
 
 
-
-// Middleware para analisar dados do corpo da requisição
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
 // Rota para o painel de login
 app.get('/panel', (req, res) => {
     res.sendFile(path.join(__dirname, './public/', 'adm.html'));
@@ -170,8 +165,6 @@ app.post('/login', (req, res) => {
         res.status(401).send('Nome de usuário ou senha incorretos.'); // Resposta de erro
     }
 });
-
-
 
 
 
