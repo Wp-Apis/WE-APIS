@@ -7,7 +7,11 @@ const PORT = process.env.PORT || 4059
 
 //pra ligar no termux👇
 //const port = 3000;
-
+var upload = multer()
+var app = express()
+const path = require('path');
+const session = require('express-session');
+const bcrypt = require('bcrypt');
 var fs = require('fs')
 var axios = require('axios')
 var mumaker = require('mumaker')
@@ -147,9 +151,66 @@ users[i3].IP.push(IP?.split(":")[3])
 fs.writeFileSync("./lib/secret/usuarios.json", JSON.stringify(users, null, 2));
 }}} 
 
-var upload = multer()
-var app = express()
- 
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Configuração de sessão
+app.use(session({
+    secret: 'seuSegredoSeguroAqui',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Use secure: true em produção com HTTPS
+}));
+
+// Hash de exemplo para a senha (normalmente vem de um banco de dados)
+const hashedPassword = bcrypt.hashSync('1404', 10);
+
+// Página inicial de login
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/", "adm.html"));
+});
+
+// Rota de login
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    if (username === 'Lady-Apis' && bcrypt.compareSync(password, hashedPassword)) {
+        // Credenciais corretas
+        req.session.authenticated = true; // Marca a sessão como autenticada
+        res.json({ success: true });
+    } else {
+        // Credenciais incorretas
+        res.json({ success: false });
+    }
+});
+
+// Middleware para verificar autenticação
+function checkAuth(req, res, next) {
+    if (req.session.authenticated) {
+        next();
+    } else {
+        res.redirect('/'); // Redireciona para a página de login se não estiver autenticado
+    }
+}
+
+// Servir a página /panel apenas para usuários autenticados
+app.get('/panel', checkAuth, (req, res) => {
+    res.sendFile(path.join(__dirname, "./public/", "adm.html")); // Certifique-se de que esta página está protegida
+});
+
+// Logout
+app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.redirect('/panel');
+        }
+        res.clearCookie('connect.sid');
+        res.redirect('/');
+    });
+});
+
+
 app.get('/security',(req, res) => {
 res.sendFile(path.join(__dirname, "./public/", "captch.html"))}); 
 app.get('/newdash',(req, res) => {
@@ -160,8 +221,8 @@ app.get('/dash',(req, res) => {
 res.sendFile(path.join(__dirname, "./public/", "docs.html"))});
 app.get('/',(req, res) => {
 res.sendFile(path.join(__dirname, "./public/", "index.html"))}); 
-app.get('/panel',(req, res) => {
-res.sendFile(path.join(__dirname, "./public/", "adm.html"))}); 
+//app.get('/panel',(req, res) => {
+//res.sendFile(path.join(__dirname, "./public/", "adm.html"))}); 
 app.get('/vips',(req, res) => {
 res.sendFile(path.join(__dirname, "./public/", "vips.html"))}); 
 
