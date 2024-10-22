@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 4059
 //pra ligar no termux👇
 //const port = 3000;
 const session = require('express-session');
-const path = require('path');
 var fs = require('fs')
 var axios = require('axios')
 var mumaker = require('mumaker')
