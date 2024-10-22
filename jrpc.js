@@ -7,11 +7,8 @@ const PORT = process.env.PORT || 4059
 
 //pra ligar no termux👇
 //const port = 3000;
-var upload = multer()
-var app = express()
-const path = require('path');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
+const path = require('path');
 var fs = require('fs')
 var axios = require('axios')
 var mumaker = require('mumaker')
@@ -152,62 +149,68 @@ fs.writeFileSync("./lib/secret/usuarios.json", JSON.stringify(users, null, 2));
 }}} 
 
 
-app.use(express.json());
+// Middleware para analisar dados do corpo da requisição
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-// Configuração de sessão
+// Configuração da sessão
 app.use(session({
-    secret: 'seuSegredoSeguroAqui',
+    secret: 'sua-chave-secreta', // Troque por uma chave secreta forte
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Use secure: true em produção com HTTPS
+    cookie: { secure: false } // Defina como true se usar HTTPS
 }));
 
-// Hash de exemplo para a senha (normalmente vem de um banco de dados)
-const hashedPassword = bcrypt.hashSync('1404', 10);
-
-// Página inicial de login
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/", "adm.html"));
-});
-
-// Rota de login
-app.post('/login', (req, res) => {
-    const { username, password } = req.body;
-
-    if (username === 'Lady-Apis' && bcrypt.compareSync(password, hashedPassword)) {
-        // Credenciais corretas
-        req.session.authenticated = true; // Marca a sessão como autenticada
-        res.json({ success: true });
+// Middleware de autenticação
+function isAuthenticated(req, res, next) {
+    if (req.session && req.session.user) {
+        return next(); // Usuário autenticado, prossiga
     } else {
-        // Credenciais incorretas
-        res.json({ success: false });
-    }
-});
-
-// Middleware para verificar autenticação
-function checkAuth(req, res, next) {
-    if (req.session.authenticated) {
-        next();
-    } else {
-        res.redirect('/'); // Redireciona para a página de login se não estiver autenticado
+        return res.redirect('/'); // Redireciona para a página de login
     }
 }
 
-// Servir a página /panel apenas para usuários autenticados
-app.get('/panel', checkAuth, (req, res) => {
-    res.sendFile(path.join(__dirname, "./public/", "adm.html")); // Certifique-se de que esta página está protegida
+// Rota para o painel de login
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/', 'adm.html'));
 });
 
-// Logout
-app.get('/logout', (req, res) => {
-    req.session.destroy(err => {
-        if (err) {
-            return res.redirect('/panel');
-        }
-        res.clearCookie('connect.sid');
-        res.redirect('/');
-    });
+// Rota de autenticação
+app.post('/login', (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    // Verifica as credenciais
+    if (username === 'Lady-Apis' && password === '1404') {
+        req.session.user = username; // Armazena o usuário na sessão
+        res.redirect('/admin'); // Redireciona para a página administrativa
+    } else {
+        res.status(401).send('Nome de usuário ou senha incorretos.'); // Resposta de erro
+    }
+});
+
+// Rota protegida para o painel administrativo
+app.get('/admin', isAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, './public/', 'admin.html'));
+});
+
+// Rota para adicionar chave (exemplo)
+app.post('/api/add-key', isAuthenticated, (req, res) => {
+    const key = req.body.key;
+    // Lógica para adicionar a chave
+    res.send(`Chave "${key}" adicionada com sucesso!`);
+});
+
+// Rota para deletar chave (exemplo)
+app.post('/api/del-key', isAuthenticated, (req, res) => {
+    const key = req.body.key;
+    // Lógica para deletar a chave
+    res.send(`Chave "${key}" deletada com sucesso!`);
+});
+
+// Inicializa o servidor
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
 
 
