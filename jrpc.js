@@ -146,7 +146,8 @@ users[i3].IP.push(IP?.split(":")[3])
 fs.writeFileSync("./lib/secret/usuarios.json", JSON.stringify(users, null, 2));
 }}} 
 
-
+var upload = multer()
+var app = express()
 
 
 
