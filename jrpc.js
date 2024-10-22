@@ -147,28 +147,12 @@ fs.writeFileSync("./lib/secret/usuarios.json", JSON.stringify(users, null, 2));
 }}} 
 
 
-// Rota para o painel de login
-app.get('/panel', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/', 'adm.html'));
-});
-
-// Rota de autenticação
-app.post('/login', (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-
-    // Verifica as credenciais
-    if (username === 'Lady-Apis' && password === '1404') {
-        // Redireciona para a página administrativa
-        res.sendFile(path.join(__dirname, './public/', 'admin.html'));
-    } else {
-        res.status(401).send('Nome de usuário ou senha incorretos.'); // Resposta de erro
-    }
-});
 
 
 
 
+app.get('/panel',(req, res) => {
+res.sendFile(path.join(__dirname, "./public/", "adm.html"))});
 app.get('/security',(req, res) => {
 res.sendFile(path.join(__dirname, "./public/", "captch.html"))}); 
 app.get('/newdash',(req, res) => {
