@@ -6,8 +6,8 @@ const path = require("path");
 const { dirname } = require('path');
 __dirname = dirname(__filename);
 
-const Caxinha = require(__path+'/base de dados/modules/backend/canvas');
-const Caxinha2 = require(__path+'/base de dados/modules/backend/canvas-2');
+const Caxinha = require(__path+'/lib/canvas');
+const Caxinha2 = require(__path+'/lib/canvas2');
 var key = JSON.parse(fs.readFileSync(__path+"/database/apikeys.json"));
 const usus_r = JSON.parse(fs.readFileSync(__path+"/database/usuarios.json"));
 
