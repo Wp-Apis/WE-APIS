@@ -17,7 +17,7 @@
   "ws": "^8.13.0",
   "axios": "",
   "canvas": "",
-  "canvasfy": "",
+  "canvafy": "",
   "jimp": ""
   },
   "devDependencies": {
