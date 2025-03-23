@@ -2,5 +2,5 @@
 
 # Instala os pacotes necessários
 echo "Instalando dependências..."
-npm install 
+npm install axios canvas canvafy
 echo "Dependências instaladas com sucesso!"
