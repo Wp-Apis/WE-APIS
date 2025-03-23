@@ -18,7 +18,8 @@
   "axios": "",
   "canvas": "",
   "canvafy": "",
-  "jimp": ""
+  "jimp": "",
+  "mumaker": "",
   },
   "devDependencies": {
     "request": "^2.81.0",
