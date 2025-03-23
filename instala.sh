@@ -2,5 +2,5 @@
 
 # Instala os pacotes necessários
 echo "Instalando dependências..."
-nom install 
+npm install 
 echo "Dependências instaladas com sucesso!"
