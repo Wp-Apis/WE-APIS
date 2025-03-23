@@ -8,7 +8,7 @@ __dirname = dirname(__filename);
 
 const Caxinha = require(__path+'/lib/canvas');
 const Caxinha2 = require(__path+'/lib/canvas2');
-var key = JSON.parse(fs.readFileSync(__path+"/database/apikeys.json"));
+var key = JSON.parse(fs.readFileSync(__path+"/lib/secret/keys.json"));
 const usus_r = JSON.parse(fs.readFileSync(__path+"/database/usuarios.json"));
 
 async function RG_US(apikey, req) {
