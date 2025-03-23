@@ -1,8 +1,6 @@
 #!/bin/bash
 
-# Instala o Axios
-echo "Instalando o Axios..."
-npm install axios
-npm install canvasfy
-npm install canvas
-echo "Axios instalado com sucesso!"
+# Instala os pacotes necessários
+echo "Instalando dependências..."
+npm install axios canvasfy canvas
+echo "Dependências instaladas com sucesso!"
