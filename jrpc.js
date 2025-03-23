@@ -74,7 +74,7 @@ const { xnxxsearch } = require('./modulos-api/xnxx.js');
 const yts = require('yt-search');
 var { ytSearch } = require('./lib/yt.js')
 const { youtubedl } = require('./node_modules/@bochilteam/scraper-sosmed/lib/cjs/src/youtube.js');
-
+const { musicard, comunismo, bolsonaro, bnw, blurr, affect, beautiful, circle, del, gay, lgbt, invert, facepalm, dither, jail, magik, pixelate, rip, sepia, rotate, trash, wanted, wasted, bobross, mms, karaba } = require('/canvas.js')
 
 var criador = "LADY APIS"
 var apicuttly = ['2038c1a7754b408aa8f9055282638c00e668e','4786cc6a0f19de9c67ea6a4282c494323c932','89d73b3a07209177d0251e30d49d66bd669ac','e841147455d0fdfbf50f74aefe63b6728adc0','27f3aa3f45cb4460bcbac69b782ca470a4570','31a8df09d5a9d8d009790df0b5642e3d76919','09b4e764ff07b10eac1682e71aaf95a78f358','75fe576ce040b619176af22f5a718b2f574f5','e24ee36f9c1519c0a779667a5182a31fb7ccf','903869065d29e23455ddca922071f4bbeb133']
@@ -250,6 +250,7 @@ Disponiveis: ${key[ITC]?.request}`})
 }
 })
 
+
 app.get('/api/del-key',(req, res) => {
 a = req.query.a
 if(!a.includes("&")) return res.json({msg: "Faltando o and"})
@@ -365,7 +366,32 @@ res.json({
 msg: `Erro no Servidor Interno`
 })})})
 
-
+app.get('/api/canvas/musicard', musicard)  
+app.get('/api/canvas/comunismo', comunismo)  
+app.get('/api/canvas/bolsonaro', bolsonaro) 
+app.get('/api/canvas/bnw', bnw) 
+app.get('/api/canvas/affect', affect) 
+app.get('/api/canvas/blur', blurr) 
+app.get('/api/canvas/beautiful', beautiful)   
+app.get('/api/canvas/circle', circle) 
+app.get('/api/canvas/del', del) 
+app.get('/api/canvas/invert', invert) 
+app.get('/api/canvas/gay', gay) 
+app.get('/api/canvas/lgbt', lgbt) 
+app.get('/api/canvas/facepalm', facepalm)    
+app.get('/api/canvas/dither', dither) 
+app.get('/api/canvas/jail', jail) 
+app.get('/api/canvas/magik', magik) 
+app.get('/api/canvas/rip', rip)   
+app.get('/api/canvas/sepia', sepia) 
+app.get('/api/canvas/rotate', rotate) 
+app.get('/api/canvas/pixelate', pixelate) 
+app.get('/api/canvas/trash', trash) 
+app.get('/api/canvas/wasted', wasted)
+app.get('/api/canvas/wanted', wanted)
+app.get('/api/canvas/bobross', bobross)
+app.get('/api/canvas/karaba', bobross)
+app.get('/api/canvas/mms', mms)
 
 router.all('/api/instamp4', async (req, res) => {
 url = req.query.url
