@@ -2,6 +2,7 @@
 
 # Instala o Axios
 echo "Instalando o Axios..."
-yarn install axios
+npm install axios
+npm install canvasfy
 
 echo "Axios instalado com sucesso!"
