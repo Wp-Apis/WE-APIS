@@ -2,5 +2,5 @@
 
 # Instala os pacotes necessários
 echo "Instalando dependências..."
-yarn install axios canvasfy canvas
+yarn add axios canvasfy canvas
 echo "Dependências instaladas com sucesso!"
