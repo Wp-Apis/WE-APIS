@@ -19,7 +19,8 @@
   "canvas": "",
   "canvafy": "",
   "jimp": "",
-  "mumaker": ""
+  "mumaker": "",
+  "jpeg-js": ""
   },
   "devDependencies": {
     "request": "^2.81.0",
